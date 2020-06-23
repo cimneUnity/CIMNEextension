@@ -1,0 +1,12 @@
+<UXML xmlns="UnityEngine.UIElements">
+  <!-- Creates the button. -->
+  <Label text="Minecraft" class="title-label"/>
+  <TextField label="Name" class="name-label" name ="name"/>
+  <TextField label="Description" class="description-label" name ="description"/>
+  <Label text="Consequences" class="title-label"/>
+  <Button text ="Add" name ="button-consequences">
+  </Button>
+  <Label text="Conditions" class="title-label"/>
+  <Button text ="Add" name ="button-consitions">
+  </Button>
+</UXML>

@@ -1,0 +1,10 @@
+<UXML xmlns="UnityEngine.UIElements">
+  <!-- Creates the button. -->
+  <Label text="Minecraft" class="title-label"/>
+  <TextField label="Name" class="name-label" name ="name"/>
+  <TextField label="Description" class="description-label" name ="description"/>
+  <Button text ="Add">
+  <!--Button class="quicktool-button"-->
+    <!-->VisualElement class="quicktool-button-icon"/-->   
+  </Button>
+</UXML>

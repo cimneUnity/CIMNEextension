@@ -1,0 +1,10 @@
+<UXML xmlns="UnityEngine.UIElements">
+  <!-- Creates the button. -->
+  <TextField label="Name" class="name-label" name ="name-field"/>
+  <Toggle label ="Sphere shape" name ="sphere-toggle"/>
+  <Toggle label ="Cube shape" name ="cube-toggle"/>
+  <Toggle label ="Cylinder shape" name ="cylinder-toggle"/>
+  <SliderInt label ="Priority" name ="priority-field" low-value="1" high-value="3"/>
+  <TextField label="Score" class="description-label" name ="score-field"/>
+  <Button text ="Create"  name ="risk-button"/>
+</UXML>
