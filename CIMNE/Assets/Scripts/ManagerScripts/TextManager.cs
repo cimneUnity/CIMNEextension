@@ -12,12 +12,12 @@ public class TextManager : MonoBehaviour
     private Toggle visibility;
     private GameObject canvas;
 
-    private void Awake()
+    private void Awake() //Called when awake
     {
         current = this;
     }
 
-    public void Start()
+    public void Start() //Called when start
     {
         canvas = GameObject.Find("PopupUI");
         textName = GameObject.Find("InputAnotationName").GetComponent<InputField>(); ;
@@ -28,7 +28,7 @@ public class TextManager : MonoBehaviour
         cancelButton.onClick.AddListener(() => { Exit(); });
     }
 
-    void Update()
+    void Update() //Called every frame
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {

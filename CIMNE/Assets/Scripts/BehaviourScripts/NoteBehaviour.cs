@@ -4,45 +4,33 @@ using UnityEngine;
 
 public class NoteBehaviour : MonoBehaviour
 {
-    private static GameObject canvas;
-    private GameObject instance;
-    private bool showLabel;
+    private GameObject floatingLabel;
 
-    void Start()
+    void Start() //Called when start
     {
-        Debug.Log("Note created");
-        showLabel = true;
-        if (showLabel)
-        {
-            canvas = GameObject.Find("PopupUI");
-            var popupText = Resources.Load("Prefabs/PopUpObject");
-            instance = (GameObject)Instantiate(popupText);
-            instance.transform.SetParent(canvas.transform);
-            instance.transform.GetComponent<UnityEngine.UI.Text>().text = this.name;
-        }
+        GameObject canvas = GameObject.Find("PopupUI");
+        var popupText = Resources.Load("Prefabs/PopUpObject");
+        floatingLabel = (GameObject)Instantiate(popupText);
+        floatingLabel.transform.SetParent(canvas.transform);
+        floatingLabel.transform.GetComponent<UnityEngine.UI.Text>().text = this.name;
     }
 
-    void Update()
+    void Update() //Called every frame
     {
-        if (showLabel)
-        {
-            Vector3 screenposition = Camera.main.WorldToScreenPoint(this.transform.position);
-            if (screenposition.z >= 0)
-            {
-                instance.SetActive(true);
-                instance.transform.position = screenposition;
-            }
-            else
-            {
-                instance.SetActive(false);
-            }
-        }
+        updateLabelPosition();
     }
 
-    public void Interact()
+    private void updateLabelPosition()
     {
-        GameObject.Find("Controller").GetComponent<WritterController>().Write("Player interact with " + this.name);
-        Material M = transform.GetComponent<Renderer>().material;
-        Destroy(M);
+        Vector3 screenposition = Camera.main.WorldToScreenPoint(this.transform.position);
+        if (screenposition.z >= 0)
+        {
+            floatingLabel.SetActive(true);
+            floatingLabel.transform.position = screenposition;
+        }
+        else
+        {
+            floatingLabel.SetActive(false);
+        }
     }
 }

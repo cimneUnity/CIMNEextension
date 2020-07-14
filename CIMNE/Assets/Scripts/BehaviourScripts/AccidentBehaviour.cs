@@ -6,40 +6,30 @@ using Random = System.Random;
 
 public class AccidentBehaviour : MonoBehaviour
 {
-    public int probability;
-    public bool showName;
+    public int probability; //Probability of the accident between 0 - 100
+    public bool showName; //Show the name on PlayMode
+    private GameObject floatingLabel; //Floating Label with the name of the accident
 
-    private static GameObject canvas;
-    private GameObject instance;
-
-    void Start()
+    void Start() //Called when start
     {
-        if (showName)
+        if (showName) //Create floatingLabel
         {
-            canvas = GameObject.Find("PopupUI");
+            GameObject canvas = GameObject.Find("PopupUI");
             var popupText = Resources.Load("Prefabs/PopUpObject");
-            instance = (GameObject)Instantiate(popupText);
-            instance.transform.SetParent(canvas.transform);
-            instance.transform.GetComponent<UnityEngine.UI.Text>().text = this.name;
+            floatingLabel = (GameObject)Instantiate(popupText);
+            floatingLabel.transform.SetParent(canvas.transform);
+            floatingLabel.transform.GetComponent<UnityEngine.UI.Text>().text = this.name;
         }
     }
 
-    void Update()
+    void Update() //Called every frame
     {
-        if (showName)
-        {
-            Vector3 screenposition = Camera.main.WorldToScreenPoint(this.transform.position);
-            if (screenposition.z >= 0)
-            {
-                instance.SetActive(true);
-                instance.transform.position = screenposition;
-            }
-            else
-            {
-                instance.SetActive(false);
-            }
-        }
+        updateLabelPosition();
+    }
 
+    void OnValidate()   //It's called every time you change public values on the Inspector
+    {
+        probability = Mathf.Clamp(probability, 1, 100); // Set the score between 0 and 9999
     }
 
     void OnTriggerEnter(Collider other)
@@ -53,4 +43,20 @@ public class AccidentBehaviour : MonoBehaviour
         }
     }
 
+    private void updateLabelPosition()
+    {
+        if (showName)
+        {
+            Vector3 screenposition = Camera.main.WorldToScreenPoint(this.transform.position);
+            if (screenposition.z >= 0)
+            {
+                floatingLabel.SetActive(true);
+                floatingLabel.transform.position = screenposition;
+            }
+            else
+            {
+                floatingLabel.SetActive(false);
+            }
+        }
+    }
 }

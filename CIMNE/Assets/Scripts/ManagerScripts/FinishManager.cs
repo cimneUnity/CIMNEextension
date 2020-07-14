@@ -6,16 +6,15 @@ using UnityEngine.UI;
 public class FinishManager : MonoBehaviour
 {
     public static FinishManager current;
-
     public int puntuation = 10;
     private Button restartButton;
 
-    private void Awake()
+    private void Awake() //Called when awake
     {
         current = this;
     }
 
-    void Start()
+    void Start() //Called when start
     {
         Debug.Log("FinishManager Start");
 
@@ -23,7 +22,7 @@ public class FinishManager : MonoBehaviour
         restartButton.onClick.AddListener(() => { Restart(); });
     }
 
-    void Update()
+    void Update() //Called every frame
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {

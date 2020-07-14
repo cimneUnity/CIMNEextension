@@ -11,8 +11,8 @@ public class PlayerManager : MonoBehaviour
     public float jumpHeight = 3f;
     public float walkSpeed = 3f;
     public float runSpeed = 6f;
-    public float gravity = -9.81f;
-    public float MaxHeigh = 4f;
+    public float gravity = 9.81f;
+    public float maxFallHeigh = 4f;
     public LayerMask groundMask; 
     public Transform groundCheck;
     public CharacterController controller;
@@ -25,12 +25,12 @@ public class PlayerManager : MonoBehaviour
     private float oldYspeed = 0f;
     private Vector3 velocity;
 
-    private void Awake()
+    private void Awake() //Called when awake
     {
         current = this;
     }
 
-    private void Start()
+    private void Start() //Called when start
     {
         Debug.Log("PlayerManager Start");
         controlling = true;
@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
         instructions = GlobalController.current.instructions;
     }
 
-    void Update()
+    void Update() //Called every frame
     {
         if (controlling)
         {
@@ -94,9 +94,8 @@ public class PlayerManager : MonoBehaviour
                 if (falling)
                 {
                     float endYPos = gameObject.transform.position.y;
-                    //Debug.Log("Tall: " + (startYPos - endYPos) + " Max: " + damageThershold);
                     falling = false;
-                    if (startYPos - endYPos > MaxHeigh)
+                    if (startYPos - endYPos > maxFallHeigh)
                     {
                         EventController.current.ChangeMode("finish", "You fall from " + (startYPos - endYPos) + "m");
                     }
@@ -110,7 +109,7 @@ public class PlayerManager : MonoBehaviour
 
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(move * speed * Time.deltaTime);
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y += -gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
 
             if (Input.GetKeyDown("space"))
@@ -118,7 +117,6 @@ public class PlayerManager : MonoBehaviour
                 if (isGrounded)
                 {
                     EventController.current.Write("Jump");
-                    //GameObject.Find("Controller").GetComponent<DataWritter>().Write("Jump");
                     velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 }
             }
@@ -151,6 +149,16 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }       
+    }
+
+    void OnValidate()   //It's called every time you change public values on the Inspector
+    {
+        groundDistance = Mathf.Clamp(groundDistance, 0.1f, 9999.0f);
+        jumpHeight = Mathf.Clamp(jumpHeight, 0.1f, 9999.0f);
+        walkSpeed = Mathf.Clamp(walkSpeed, 0.1f, 9999.0f); 
+        runSpeed = Mathf.Clamp(runSpeed, 0.1f, 9999.0f); 
+        gravity = Mathf.Clamp(gravity, 0.1f, 9999.0f); 
+        maxFallHeigh = Mathf.Clamp(maxFallHeigh, 0.1f, 9999.0f); 
     }
 
     public void Activate()

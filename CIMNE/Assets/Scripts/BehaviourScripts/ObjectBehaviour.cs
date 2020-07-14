@@ -8,15 +8,14 @@ public class ObjectBehaviour : MonoBehaviour
     public string description;
     public string scriptInteract = null;
     public string scriptTouch = null;
-    public bool showname = false;
+    public bool showName = false;
     public bool showDescription = true;
-    //public bool tableInvolved = false;
     private static GameObject canvas;
-    private GameObject instance;
+    private GameObject floatingLabel; //Floating Label with the name of the risk
     private InteractObject intObj;
     private TouchObject touObj;
 
-    void Start()
+    void Start() //Called when start
     {
         if (description == "") description = "";
         if (scriptInteract != null)
@@ -29,33 +28,22 @@ public class ObjectBehaviour : MonoBehaviour
             touObj = new TouchObject(scriptTouch);
         }
 
-        if (showname)
+        if (showName) //Create floatingLabel
         {
             canvas = GameObject.Find("PopupUI");
             var popupText = Resources.Load("Prefabs/PopUpObject");
-            instance = (GameObject)Instantiate(popupText);
-            instance.transform.SetParent(canvas.transform);
-            instance.transform.GetComponent<UnityEngine.UI.Text>().text = this.name;
+            floatingLabel = (GameObject)Instantiate(popupText);
+            floatingLabel.transform.SetParent(canvas.transform);
+            floatingLabel.transform.GetComponent<UnityEngine.UI.Text>().text = this.name;
         }
     }
 
-    void Update()
+    void Update() //Called every frame
     {
-        if (showname)
-        {
-            Vector3 screenposition = Camera.main.WorldToScreenPoint(this.transform.position);
-            if (screenposition.z >= 0)
-            {
-                instance.SetActive(true);
-                instance.transform.position = screenposition;
-            }
-            else
-            {
-                instance.SetActive(false);
-            }
-        }
+        updateLabelPosition();
     }
-    public void Interact()
+
+    public void Interact() //Called whene player interact with object
     {
         EventController.current.ObjectTriggerEnter(this.name);
 
@@ -65,12 +53,30 @@ public class ObjectBehaviour : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other) //Called whene player touches object Collider
     {
         EventController.current.ColliderTriggerEnter(this.name);
+
         if (touObj != null)
         {
             touObj.Touch();
+        }
+    }
+
+    private void updateLabelPosition()
+    {
+        if (showName)
+        {
+            Vector3 screenposition = Camera.main.WorldToScreenPoint(this.transform.position);
+            if (screenposition.z >= 0)
+            {
+                floatingLabel.SetActive(true);
+                floatingLabel.transform.position = screenposition;
+            }
+            else
+            {
+                floatingLabel.SetActive(false);
+            }
         }
     }
 }
