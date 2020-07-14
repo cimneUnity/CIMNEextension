@@ -8,7 +8,7 @@ public class EventController : MonoBehaviour
 {
     public static EventController current;
 
-    private void Awake()
+    private void Awake() //Called when awake
     {
         current = this;
         //Debug.Log("EventController Start");

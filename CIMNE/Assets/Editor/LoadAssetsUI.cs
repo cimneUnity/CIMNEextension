@@ -105,6 +105,5 @@ public class LoasAssetsUI : EditorWindow
                 }
             }
         }
-        
     }
 }

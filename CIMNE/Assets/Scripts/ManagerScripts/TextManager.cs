@@ -35,11 +35,6 @@ public class TextManager : MonoBehaviour
             Debug.Log("Enter pressed");
             Save();
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Button 0");
-        }
     }
 
     void Save()
@@ -52,7 +47,7 @@ public class TextManager : MonoBehaviour
             
             newNote.transform.SetParent(canvas.transform);
             newNote.transform.position = GameObject.Find("Player").transform.position;
-            Debug.Log(newNote == null ? "No creat" : "Creat");
+            //Debug.Log(newNote == null ? "No creat" : "Creat");
         }
 
         Exit();

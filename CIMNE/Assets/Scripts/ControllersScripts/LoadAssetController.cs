@@ -8,7 +8,7 @@ public class LoadAssetBundles : MonoBehaviour
     public string path;
     public string assetName;
 
-    void Start()
+    void Start() //Called when start
     {
         LoadAssetBundle(path);
         InstantiateObjectFromBundle(assetName);

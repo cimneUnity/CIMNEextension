@@ -17,7 +17,6 @@ public class ModeController : MonoBehaviour
 
     void Start()
     {
-        //Debug.Log("EventController Start");
         EventController.current.onChangeMode += ChangeMode;
         playerCamara = GameObject.Find("PlayerCamera");
         playerCamara.SetActive(true);
@@ -44,7 +43,7 @@ public class ModeController : MonoBehaviour
         
     }
 
-    void ActivateType()
+    private void ActivateType()
     {
         mode = "type";
         playUI.SetActive(false);
@@ -54,7 +53,7 @@ public class ModeController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void ActivateFinish(string reason)
+    private void ActivateFinish(string reason)
     {
         mode = "finish";
         playUI.SetActive(false);
@@ -65,7 +64,7 @@ public class ModeController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void ActivatePlay()
+    private void ActivatePlay()
     {
         mode = "play";
         playUI.SetActive(true);

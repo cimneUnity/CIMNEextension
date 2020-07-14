@@ -6,9 +6,9 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     public static UIController current;
-
-    public int count3, count2, count1, oldState;
     public bool UItask, UIobject, UIscore, UItime, UIrisk, UIpointer, UIstate, ViewObjects, ViewRisks;
+
+    private int count3, count2, count1, oldState;
     private GameObject labelTime, labelScore, labelRiskName, labelRiskDistance, colorState, player;
     private GameObject labelObjectName, labelObjectNameExt, labelObjectDescription, labelObjectDescriptionExt, objectDescriptionPart, objectDescriptionExtPart, objectNamePart;
     private GameObject mainGUI;
@@ -37,7 +37,6 @@ public class UIController : MonoBehaviour
         if (UIrisk) riskController();
         if (UIstate) stateController();
         
-        //Debug.Log("GUI: " + rtf.sizeDelta.x + " x " + rtf.sizeDelta.y + " Screen: " + Screen.width + " x " + Screen.height);
         Vector2 vd = rtf.sizeDelta;
         if (rtf.sizeDelta.x != Screen.width) vd.x = Screen.width;
         if (rtf.sizeDelta.y != Screen.height) vd.y = Screen.height;
@@ -205,7 +204,6 @@ public class UIController : MonoBehaviour
             objectDescriptionPart.SetActive(false);
             showingExtension = false;
         }
-        
     }
 
     private void ExtendDescription()
@@ -223,22 +221,21 @@ public class UIController : MonoBehaviour
             {
                 objectDescriptionExtPart.SetActive(false);
             }
-            
         }
     }
 
     public void enterZone(int importance)
     {
 
-        if (importance > 2) ++count3;
+        if (importance == 3) ++count3;
         if (importance == 2) ++count2;
-        if (importance < 2) ++count1;
+        if (importance == 1) ++count1;
     }
 
     public void exitZone(int importance)
     {
-        if (importance > 2) --count3;
+        if (importance == 3) --count3;
         if (importance == 2) --count2;
-        if (importance < 2) --count1;
+        if (importance == 1) --count1;
     }
 }

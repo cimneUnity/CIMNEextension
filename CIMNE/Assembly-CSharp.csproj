@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\BehaviourScripts\RiskBehaviour.cs" />
     <Compile Include="Assets\Scripts\ControllersScripts\EventController.cs" />
     <Compile Include="Assets\Scripts\ControllersScripts\GlobalController.cs" />
-    <Compile Include="Assets\Scripts\ControllersScripts\InstructionController.cs" />
     <Compile Include="Assets\Scripts\ControllersScripts\LoadAssetController.cs" />
     <Compile Include="Assets\Scripts\ControllersScripts\ModeController.cs" />
     <Compile Include="Assets\Scripts\ControllersScripts\StorytellController.cs" />

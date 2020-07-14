@@ -13,7 +13,7 @@ public class RiskUI : EditorWindow
     private Toggle tsphd, tcub, tcyl;
     private GameObject riskParent;
     private string lastChanged = "sphere";
-    [MenuItem("Cimne/Risks  _%#R")]
+    [MenuItem("Cimne/Risks")]
 
     static void Init()
     {

@@ -24,8 +24,6 @@ public class AssetBundleController
 
     public void SaveAssetBundle(string pathTmp)
     {
-        
-        //BuildPipeline.BuildAssetBundles(path, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.StandaloneWindows64);
         if (Directory.Exists(pathTmp))
         {
             pathDefault = pathTmp;

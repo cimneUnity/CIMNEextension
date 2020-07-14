@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class GlobalController : MonoBehaviour
 {
-    //Pull satisfactorio
     public static GlobalController current;
     public int globalScore;
     public bool restart, type, finish, instructions;
@@ -14,15 +13,13 @@ public class GlobalController : MonoBehaviour
     private List<GameObject> riskList;
     private GameObject risk;
 
-    private void Awake()
+    private void Awake() //Called when awake
     {
         current = this;
     }
 
-    void Start()
+    void Start() //Called when start
     {
-        //Debug.Log("GlobalController Start");
-
         risk = GameObject.Find("Risks");
         globalScore = 0;
         globalTime = 0;
@@ -35,7 +32,7 @@ public class GlobalController : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update() //Called every frame
     {
         globalTime += Time.deltaTime;
          
@@ -54,7 +51,6 @@ public class GlobalController : MonoBehaviour
     public void InstantiatePrefab(UnityEngine.Object prefab, string nameObj, string nameAsset, string descriptionObj)
     {
         GameObject InitiatedAsset = (GameObject)Instantiate(prefab);
-        //Debug.Log(InitiatedAsset == null ? " Failed" : " Loaded: " + nameItem.value);
         if (InitiatedAsset.GetComponent<ObjectBehaviour>() == null)
         {
             ObjectBehaviour ob = InitiatedAsset.AddComponent<ObjectBehaviour>() as ObjectBehaviour;
@@ -66,8 +62,6 @@ public class GlobalController : MonoBehaviour
             {
                 InitiatedAsset.name = nameAsset;
             }
-            //InitiatedAsset.layer = 10;
-
             ob.description = descriptionObj;
         }
     }
