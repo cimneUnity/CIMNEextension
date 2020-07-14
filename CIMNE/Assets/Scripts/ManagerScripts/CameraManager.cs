@@ -7,7 +7,6 @@ public class CameraManager : MonoBehaviour
 {
     public static CameraManager current;
 
-    public bool interact = false;
     public float mouseSensitivity = 200f;
     public float maxDistance = 7f;
     public Transform playerBody;
@@ -18,25 +17,30 @@ public class CameraManager : MonoBehaviour
     private RaycastHit hit;
     private GameObject newObjectLooking, oldObjectLooking;
 
-    private void Awake()
+    private void Awake() //Called when awake
     {
         current = this;
     }
-    void Start()
+    void Start() //Called when awake
     {
-        Debug.Log("CameraManager Start");
+        //Debug.Log("CameraManager Start");
         controlling = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() //Called every frame
     {
         if (controlling)
         {
-            MouseControl();
-            CloseObjects();
-            MouseButtons();
+            MouseControl(); //Mouse movement input
+            CloseObjects(); //Detect close objects
+            MouseButtons(); //Mouse buttons inputs
         }
+    }
+
+    void OnValidate()   //It's called every time you change public values on the Inspector
+    {
+        mouseSensitivity = Mathf.Clamp(mouseSensitivity, 1.0f, 9999.0f);
+        maxDistance = Mathf.Clamp(maxDistance, 1.0f, 30.0f);
     }
 
     void MouseControl()

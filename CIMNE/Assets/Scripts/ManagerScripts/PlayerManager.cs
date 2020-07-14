@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start() //Called when start
     {
-        Debug.Log("PlayerManager Start");
+        //Debug.Log("PlayerManager Start");
         controlling = true;
         speed = walkSpeed;
         restart = GlobalController.current.restart; 
@@ -126,8 +127,9 @@ public class PlayerManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Debug.Log("Key R");
-                    Application.LoadLevel(0);
+                    //Debug.Log("Key R");
+                    Scene scene = SceneManager.GetActiveScene();
+                    SceneManager.LoadScene(scene.name);
                 }
             }
 
@@ -135,7 +137,7 @@ public class PlayerManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.T))
                 {
-                    Debug.Log("Key T");
+                    //Debug.Log("Key T");
                     EventController.current.ChangeMode("type", null);
                 }
             }
@@ -144,7 +146,7 @@ public class PlayerManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    Debug.Log("Key E");
+                    //Debug.Log("Key E");
                     EventController.current.ChangeMode("finish", "You ended manually the simulation");
                 }
             }

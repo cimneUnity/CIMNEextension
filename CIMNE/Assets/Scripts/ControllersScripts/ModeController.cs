@@ -17,7 +17,7 @@ public class ModeController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("EventController Start");
+        //Debug.Log("EventController Start");
         EventController.current.onChangeMode += ChangeMode;
         playerCamara = GameObject.Find("PlayerCamera");
         playerCamara.SetActive(true);
@@ -30,7 +30,6 @@ public class ModeController : MonoBehaviour
         popupUI.SetActive(true);
         typeUI.SetActive(false);
         finishUI.SetActive(false);
-        //tableUI.SetActive(false);
     }
 
     private void ChangeMode(string newMode, string extra)

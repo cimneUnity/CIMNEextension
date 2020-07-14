@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class GlobalController : MonoBehaviour
 {
+    //Pull satisfactorio
     public static GlobalController current;
     public int globalScore;
     public bool restart, type, finish, instructions;
@@ -20,8 +21,7 @@ public class GlobalController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("GlobalController Start");
-
+        //Debug.Log("GlobalController Start");
 
         risk = GameObject.Find("Risks");
         globalScore = 0;

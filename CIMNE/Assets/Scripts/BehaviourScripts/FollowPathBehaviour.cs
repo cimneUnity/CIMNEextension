@@ -57,13 +57,28 @@ public class FollowPathBehaviour : MonoBehaviour
 
     void SetPath()
     {
-        Transform child = GameObject.Find(pathName).transform;
-        if (child != null)
+        if (pathName != null)
         {
-            path_objs.Clear();
-            int children = child.transform.childCount;
-            for (int i = 0; i < children; ++i) path_objs.Add(child.transform.GetChild(i));
-            if (path_objs.Count != 0) loop = true;
+            GameObject path = GameObject.Find(pathName);
+            if (path != null)
+            {
+                Transform child = path.transform;
+                if (child != null)
+                {
+                    path_objs.Clear();
+                    int children = child.transform.childCount;
+                    for (int i = 0; i < children; ++i) path_objs.Add(child.transform.GetChild(i));
+                    if (path_objs.Count != 0) loop = true;
+                }
+            }
+            else
+            {
+                Debug.Log("GameObject " + name + " with FollowPathBehaviour.cs has a invalid path assigned");
+            }
+        }
+        else
+        {
+            Debug.Log("GameObject " + name + " with FollowPathBehaviour.cs has no path assigned");
         }
     }
 

@@ -37,7 +37,7 @@ public class UIController : MonoBehaviour
         if (UIrisk) riskController();
         if (UIstate) stateController();
         
-        Debug.Log("GUI: " + rtf.sizeDelta.x + " x " + rtf.sizeDelta.y + " Screen: " + Screen.width + " x " + Screen.height);
+        //Debug.Log("GUI: " + rtf.sizeDelta.x + " x " + rtf.sizeDelta.y + " Screen: " + Screen.width + " x " + Screen.height);
         Vector2 vd = rtf.sizeDelta;
         if (rtf.sizeDelta.x != Screen.width) vd.x = Screen.width;
         if (rtf.sizeDelta.y != Screen.height) vd.y = Screen.height;

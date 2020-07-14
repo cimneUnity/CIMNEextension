@@ -11,7 +11,7 @@ public class EventController : MonoBehaviour
     private void Awake()
     {
         current = this;
-        Debug.Log("EventController Start");
+        //Debug.Log("EventController Start");
     }
 
     public event Action<string> onObjectTriggerEnter;
