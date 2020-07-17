@@ -87,9 +87,7 @@
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
-    <None Include="Assets\Resources\instructions.txt" />
     <None Include="Assets\Resources\Data\abc.txt" />
-    <None Include="Assets\Resources\provaray.txt" />
     <None Include="Assets\Resources\Data\Exemple.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Raimon/Repositoris/CIMNExtension/CIMNE/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

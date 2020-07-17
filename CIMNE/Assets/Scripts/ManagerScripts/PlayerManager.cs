@@ -6,10 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager current;
-
-    
+    public bool fallDamage = false;
     public float groundDistance = 0.2f;
-    public float jumpHeight = 3f;
+    public float jumpHeight = 2f;
     public float walkSpeed = 3f;
     public float runSpeed = 6f;
     public float gravity = 9.81f;
@@ -40,6 +39,14 @@ public class PlayerManager : MonoBehaviour
         type = GlobalController.current.type; 
         finish = GlobalController.current.finish;
         instructions = GlobalController.current.instructions;
+
+        if (fallDamage)
+        {
+            Debug.Log("Fall activated");
+        } else
+        {
+            Debug.Log("Fall deactivated");
+        }
     }
 
     void Update() //Called every frame
@@ -70,57 +77,31 @@ public class PlayerManager : MonoBehaviour
                 speed = walkSpeed;
             }
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
-            if (!isGrounded )
-            {
-                if (!falling)
-                {
-                    falling = true;
-                    startYPos = gameObject.transform.position.y;
-                } 
-                
-                if (velocity.y < 0 && oldYspeed > 0)
-                {
-                    startYPos = gameObject.transform.position.y;
-                }
-                oldYspeed = velocity.y;
-            }
 
-            if (isGrounded)
-            {
-
-                if (falling)
-                {
-                    float endYPos = gameObject.transform.position.y;
-                    falling = false;
-                    if (startYPos - endYPos > maxFallHeigh)
-                    {
-                        EventController.current.ChangeMode("finish", "You fall from " + (startYPos - endYPos) + "m");
-                    }
-                }
-
-                if (velocity.y < 0)
-                {
-                    velocity.y = -2f;
-                }
-            }
-
+            if (fallDamage) fallFuncition();
+            
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(move * speed * Time.deltaTime);
-            velocity.y += -gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
 
             if (Input.GetKeyDown("space"))
             {
                 if (isGrounded)
                 {
                     EventController.current.Write("Jump");
-                    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                    velocity.y = Mathf.Sqrt(jumpHeight * -2f * -gravity);
+                }
+                else
+                {
+                    Debug.Log("Not grounded");
                 }
             }
+
+            velocity.y += -gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
 
             if (restart)
             {
@@ -171,6 +152,43 @@ public class PlayerManager : MonoBehaviour
     public void Deactivate()
     {
         controlling = false;
+    }
+
+    private void fallFuncition()
+    {
+        if (!isGrounded)
+        {
+            if (!falling)
+            {
+                falling = true;
+                startYPos = gameObject.transform.position.y;
+            }
+
+            if (velocity.y < 0 && oldYspeed > 0)
+            {
+                startYPos = gameObject.transform.position.y;
+            }
+            oldYspeed = velocity.y;
+        }
+
+        if (isGrounded)
+        {
+
+            if (falling)
+            {
+                float endYPos = gameObject.transform.position.y;
+                falling = false;
+                if (startYPos - endYPos > maxFallHeigh)
+                {
+                    EventController.current.ChangeMode("finish", "You fall from " + (startYPos - endYPos) + "m");
+                }
+            }
+
+            if (velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
+        }
     }
 
 }
