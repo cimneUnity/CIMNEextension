@@ -113,15 +113,4 @@ public class EventController : MonoBehaviour
             onTriggerExitRisk(importance);
         }
     }
-
-    public event Action onOpenInstructuions;
-    public void OpenInstructuions()
-    {
-        //Debug.Log("OpenInstructuions");
-        if (onOpenInstructuions != null)
-        {
-            onOpenInstructuions();
-        }
-    }
-
 }

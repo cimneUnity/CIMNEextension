@@ -8,10 +8,11 @@ public class GlobalController : MonoBehaviour
 {
     public static GlobalController current;
     public int globalScore;
-    public bool restart, type, finish, instructions;
+    public bool restart, type, finish;
     private float globalTime;
     private List<GameObject> riskList;
-    private GameObject risk;
+    private bool timeStop = false;
+    private bool timeDirection = true;
 
     private void Awake() //Called when awake
     {
@@ -20,7 +21,7 @@ public class GlobalController : MonoBehaviour
 
     void Start() //Called when start
     {
-        risk = GameObject.Find("Risks");
+        GameObject risk = GameObject.Find("Risks");
         globalScore = 0;
         globalTime = 0;
         riskList = new List<GameObject>();
@@ -34,13 +35,66 @@ public class GlobalController : MonoBehaviour
 
     void Update() //Called every frame
     {
-        globalTime += Time.deltaTime;
-         
+        if (timeStop)
+        {
+            if (timeDirection)
+            {
+                globalTime += Time.deltaTime;
+            } else
+            {
+                globalTime -= Time.deltaTime;
+            }
+        }
     }
 
-    public float GetTime()
+    //Score functions
+    public int getScore()
+    {
+        return globalScore;
+    }
+
+    public void setScore(int newScore)
+    {
+        globalScore = newScore;
+
+    }
+
+    public void addScore(int newScore)
+    {
+        globalScore += newScore;
+    }
+
+    //TimeFunctions
+    public float getTime()
     {
         return globalTime;
+    }
+
+    public bool setTime(float newTime)
+    {
+        if (newTime < 0) return false;
+        globalTime = newTime;
+        return true;
+    }
+
+    public void addTime(float newTime)
+    {
+        globalTime += newTime;
+    }
+
+    public void startTime()
+    {
+        timeStop = true;
+    }
+
+    public void stopTime()
+    {
+        timeStop = false;
+    }
+
+    public void setTimeDirection(bool direction)
+    {
+        timeDirection = direction;
     }
 
     public List<GameObject> GetRiskList()

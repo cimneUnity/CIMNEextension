@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     public Transform groundCheck;
     public CharacterController controller;
 
-    private bool isGrounded, restart, type, finish, instructions;
+    private bool isGrounded, restart, type, finish;
     private bool controlling = true;
     private bool falling = false;
     private float speed;
@@ -38,7 +38,6 @@ public class PlayerManager : MonoBehaviour
         restart = GlobalController.current.restart; 
         type = GlobalController.current.type; 
         finish = GlobalController.current.finish;
-        instructions = GlobalController.current.instructions;
 
         if (fallDamage)
         {
@@ -57,14 +56,6 @@ public class PlayerManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 speed = runSpeed;
-            }
-
-            if (instructions)
-            {
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    EventController.current.OpenInstructuions();
-                }
             }
 
             if (Input.GetKeyDown(KeyCode.I))

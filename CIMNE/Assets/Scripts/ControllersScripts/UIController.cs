@@ -101,7 +101,7 @@ public class UIController : MonoBehaviour
 
     void timeController()
     {
-        float time = GlobalController.current.GetTime();
+        float time = GlobalController.current.getTime();
         string tmpStr = TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss");
         labelTime.GetComponent<UnityEngine.UI.Text>().text = tmpStr;
     }
